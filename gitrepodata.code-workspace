@@ -1,0 +1,13 @@
+{
+    "folders": [
+        {
+            "path": "../cmake-git-version-tracking.fork"
+        },
+        {
+            "path": "../CMake-GitVersion.fork"
+        },
+        {
+            "path": "../git-repo-data-cmake"
+        }
+    ]
+}

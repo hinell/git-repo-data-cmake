@@ -1,0 +1,50 @@
+{
+ "version": 4,
+ "cmakeMinimumRequired": {
+	"major": 3,
+	"minor": 16,
+	"patch": 3
+ },
+ "include": [],
+ "configurePresets": [
+  {
+			"name"          : "common"
+		, "hidden"        : false
+		, "displayName"   : "Common configuration"
+		, "inherits"      : [  ]
+		, "description"   : "Common config"
+		, "generator"     : "Unix Makefiles"
+		, "toolchainFile" : ""
+		, "binaryDir"     : "${sourceDir}/.build/"
+		, "installDir"    : "${sourceDir}/.dist/"
+		, "cacheVariables": {
+				"CMAKE_MODULE_PATH": { "value": "${sourceDir}/cmake" ,"type": "PATH" }
+		}
+		,"environment" : {
+				"CMAKE_INSTALL_MODE"           : "SYMLINK"
+			, "CMAKE_EXPORT_COMPILE_COMMANDS": "ON"
+			, "LDFLAGS"                      : "-fuse-ld=lld"
+		}
+	}
+ ],
+ "buildPresets": [
+		{
+				"name"            : "common"
+			, "hidden"          : false
+			, "displayName"     : "Common build"
+			, "inherits"        : []
+			, "description"     : "Common build"
+			, "configurePreset" : "common"
+			, "inheritConfigureEnvironment": true
+
+		 ,"environment" : {
+		 }
+		 , "targets"          : []
+		 , "configuration"    : "Release"
+		 , "verbose"          : false
+		 , "nativeToolOptions": []
+		}
+
+	],
+ "testPresets" : [  ]
+}

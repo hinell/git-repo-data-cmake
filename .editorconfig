@@ -1,0 +1,10 @@
+# https://editorconfig.org/
+root                      = true
+[*]
+indent_style              = tab
+#indent_size               = 4 # For space indent style
+tab_width                 = 2 # For tab   indent style
+end_of_line               = lf
+charset                   = utf-8
+trim_trailing_whitespace  = true
+insert_final_newline      = false
