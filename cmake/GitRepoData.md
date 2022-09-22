@@ -18,12 +18,12 @@ GITRepoData_Target(
 	# Assigned to global GITREPODATA_TARGETNAME variable
 	<TARGET_NAME>
 
-	# DPRCT: [September 19, 2022] No need
-	[ LANG "cxx" | "c" ]
+	# Supported languages
+	[ LANG "CXX" | "C" ]
 
 	# Path is relative to the current CMAKE_CURRENT_BINARY_DIR
 	# and depends on the target name
-	[ OUTPUT_PATH "include/${TARGET_NAME}.h" ]
+	[ OUTPUT_PATH "include/${TARGET_NAME}.hh" ]
 
 	# DPRCT: [September 12, 2022] Remove this?
 	# Headers to be `#include`d into OUTPUT_PATH header

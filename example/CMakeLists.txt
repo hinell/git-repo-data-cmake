@@ -33,10 +33,12 @@ file(WRITE
 
 #------------------------------------------------------------------------Targets
 
+
+# Git repository header file interface library
 GITRepoData_Target(
 	"example-git-version"
-	OUTPUT_PATH "include/example-git-version.h"
-	PREFIX "GGG"
+	OUTPUT_PATH "include/example-git-version.hh"
+	PREFIX "GIT"
 
 	SYMBOLS
 		BRANCH
@@ -67,8 +69,31 @@ GITRepoData_Target(
 )
 cmake_print_variables(GITREPODATA_TARGETNAME)
 
-if(TARGET fuck)
-	message(STATUS "+++=GitRepoData Target successfully created in parent scope")
+#------------------------------------------------------------------------example
+add_executable(example "example.cc")
+# DEPENDENCY is any of: target name, library name (e.g. zlib),
+target_link_libraries(
+	example
+	PRIVATE ${GITREPODATA_TARGETNAME}
+)
+set_target_properties(
+	example
+	PROPERTIES
+		WIN32_EXECUTABLE      $<IF:$<PLATFORM_ID:Windows>,TRUE,FALSE>
+		MACOSX_BUNDLE         $<IF:$<PLATFORM_ID:Darwin>,TRUE,FALSE>
+		CXX_COMPILER_LAUNCHER ccache
+		C_COMPILER_LAUNCHER   ccache
+		LINKER_LANGUAGE       CXX
+		ENABLE_EXPORTS        FALSE
+		#RESOURCE             "list;of;files"
+
+		BUILD_WITH_INSTALL_RPATH  $<IF:$<INSTALL_INTERFACE>,TRUE,FALSE>
+		INSTALL_RPATH_USE_LINK_PATH TRUE
+		INSTALL_RPATH "${CMAKE_INSTALL_PREFIX}/${CMAKE_INSTALL_BINDIR}/${PACKAGE_GROUP_NAME}-${PROJECT_VERSION_MAJOR}"
+)
+
+if(TARGET ${GITREPODATA_TARGETNAME})
+	message(STATUS "+++=GitRepoData ${GITREPODATA_TARGETNAME} target successfully created in parent scope")
 endif()
 
 # Put this at the bottom of the CMakeLists.txt
